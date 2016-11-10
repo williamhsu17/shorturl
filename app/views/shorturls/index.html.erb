@@ -1,0 +1,20 @@
+<h1>Short URL Generator</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>url id</th>
+      <th>連結網址</th>
+      <th>短網址</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @short_urls.each do |short_urls| %>
+    <tr>
+      <td><%= short_urls.id %></td>
+      <td><%= short_urls.input_url %></td>
+      <td><%= short_urls.short_url %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
