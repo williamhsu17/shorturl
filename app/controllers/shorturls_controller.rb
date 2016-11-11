@@ -1,11 +1,12 @@
 class ShorturlsController < ApplicationController
   def index
     @short_urls = Shorturl.all
+    # never all 請分頁
     @shorturl = Shorturl.new
   end
 
   def create
-    @shorturl = Shorturl.new( shorturl_params )
+    @shorturl = Shorturl.new(shorturl_params)
     @shorturl.short_url = SecureRandom.urlsafe_base64(4)
 
     if @shorturl.save
@@ -16,7 +17,7 @@ class ShorturlsController < ApplicationController
   end
 
   def redirect
-    @link_url = Shorturl.where(:short_url => params[:short_url]).first
+    @link_url = Shorturl.find_by_short_url(params[:short_url])
     @link_url.link_counter += 1
     @link_url.save
 
@@ -30,7 +31,7 @@ class ShorturlsController < ApplicationController
   end
 
   private
-    def shorturl_params
-      params.require(:shorturl).permit(:input_url, :short_url)
-    end
+  def shorturl_params
+    params.require(:shorturl).permit(:input_url, :short_url)
+  end
 end
