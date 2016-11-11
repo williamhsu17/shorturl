@@ -1,33 +1,33 @@
 <h1>Short URL Generator</h1>
-
-<%= form_for @shorturl, :url => shorturls_path, :method => :post do |shorturl|%>
-  <div class="form-group">
-    <%= shorturl.url_field :input_url, :class => "form-control" %>
-  </div>
-  <%= shorturl.submit "Create New URL", :class => "btn btn-primary" %>
+<!--排版-->
+<%= form_for @shorturl, :url => shorturls_path, :method => :post do |shorturl| %>
+    <div class="form-group">
+      <%= shorturl.url_field :input_url, :class => "form-control" %>
+    </div>
+    <%= shorturl.submit "Create New URL", :class => "btn btn-primary" %>
 <% end %>
 
-<table class = "table">
+<table class="table">
   <thead>
-    <tr>
-      <th class = "text-center">url id</th>
-      <th class = "text-center">連結網址</th>
-      <th class = "text-center">短網址</th>
-      <th class = "text-center">點擊次數</th>
-      <th></th>
-    </tr>
+  <tr>
+    <th class="text-center">url id</th>
+    <th class="text-center">連結網址</th>
+    <th class="text-center">短網址</th>
+    <th class="text-center">點擊次數</th>
+    <th></th>
+  </tr>
   </thead>
   <tbody>
   <% @short_urls.each do |short_url| %>
-    <tr>
-      <td class = "text-center"><%= short_url.id %></td>
-      <td><%= link_to short_url.input_url, short_url.input_url, :target => "_blank" %></td>
-      <td><%= link_to "#{request.protocol}#{request.host_with_port}/#{short_url.short_url}", "#{request.protocol}#{request.host_with_port}/#{short_url.short_url}", :target => "_blank" %></td>
-      <td class = "text-center"><%= short_url.link_counter %></td>
-      <td class = "text-center">
-        <%= link_to "", shorturl_path(short_url), :method => :delete, :class => "btn btn-danger glyphicon glyphicon-trash" %>
-      </td>
-    </tr>
+      <tr>
+        <td class="text-center"><%= short_url.id %></td>
+        <td><%= link_to short_url.input_url, short_url.input_url, :target => "_blank" %></td>
+        <td><%= link_to "#{request.protocol}#{request.host_with_port}/#{short_url.short_url}", "#{request.protocol}#{request.host_with_port}/#{short_url.short_url}", :target => "_blank" %></td>
+        <td class="text-center"><%= short_url.link_counter %></td>
+        <td class="text-center">
+          <%= link_to "", shorturl_path(short_url), :method => :delete, :class => "btn btn-danger glyphicon glyphicon-trash" %>
+        </td>
+      </tr>
   <% end %>
   </tbody>
 </table>
